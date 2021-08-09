@@ -1,8 +1,0 @@
-name = Content Limiter
-description = Allows for limiting the total amount of nodes of each type and gradual reduction.
-backdrop = 1.x
-type = module
-package = System
-configure = admin/config/content/content-limiter
-
-project = content_limiter
