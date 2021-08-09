@@ -1,0 +1,7 @@
+{
+    "_config_name": "content_limiter.settings",
+    "cl_max_deletion": "25"
+    "cl_logging": "0"
+    "cl_message": "0"
+    "cl_warning": "0"
+}
