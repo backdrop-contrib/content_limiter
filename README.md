@@ -8,6 +8,7 @@
 <ul>
 <li>Incrimental reduction of nodes</li>
 <li>Configuration for limiting per content type</li>
+<li>Configurable amount of content pieces to delete at a time</li>
 <li>Configurable site messages</li>
 <li>Configurable watchdog logging</li>
 </ul>
