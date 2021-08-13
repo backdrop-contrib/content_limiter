@@ -132,16 +132,17 @@ function content_limiter_node_presave($node) {
 					}
 					$nodes = node_load_multiple(array(), array('type' => $type)); // array of nodes of type
 					$nodes_delete = array_slice($nodes, 0, $delete_quantity); // array of nodes to delete
-					foreach($nodes_delete as $key=>$value) { // loop to delete nodes
-						$nid = $value->nid;
-						node_delete($nid);
+					foreach ($nodes_delete as $delete_node) {
+						$delete_nids[] = $delete_node->nid;
 					}
+					node_delete_multiple($delete_nids);
 					if($enable_logging == 1) {
 						watchdog('content', $delete_quantity.' '.$type.' nodes deleted by content limiter.');
 					}
 					if($enable_message == 1) {
 						backdrop_set_message(t('Content limiting detected ('.$delete_quantity.' deleted)'), 'warning');
 					}
+					file_put_contents('filename.txt', print_r($delete_nids, true));
 				}
 			}
 	}
