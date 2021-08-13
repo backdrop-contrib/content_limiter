@@ -7,7 +7,7 @@
 <h3>Features</h3>
 <ul>
 <li>Incrimental reduction of nodes</li>
-<li>Configuration for each content type</li>
+<li>Configuration for limiting per content type</li>
 <li>Configurable site messages</li>
 <li>Configurable watchdog logging</li>
 </ul>
