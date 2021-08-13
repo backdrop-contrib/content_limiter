@@ -14,7 +14,7 @@ Allows for limiting the total amount of nodes of each type and gradual reduction
 <li>Limit database size</li>
 <li>Safeguard for sites with massive content scope</li>
 <li>Rolling data sets with specific sample size</li>
-<li>Removing excess for feed imports or other automated content creation</li>
+<li>Removing excess for feed imports or other forms of automated content creation</li>
 </ul>
 
 
