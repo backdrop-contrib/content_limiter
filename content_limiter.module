@@ -4,6 +4,7 @@
  * Allows for limiting the total amount of nodes and gradual reduction.
  */
 
+
 /**
  * Implements hook_config_info().
  */
@@ -16,6 +17,7 @@ function content_limiter_config_info() {
   );
 }
 
+
 /**
  * Implements hook_permission().
  */
@@ -26,6 +28,7 @@ function content_limiter_permission() {
     ),
   );
 }
+
 
 /**
  * Implements hook_menu().
@@ -43,45 +46,48 @@ function content_limiter_menu() {
 	);
 }
 
+/**
+ * Implements hook_form_alter().
+ */
 function content_limiter_form_alter(&$form, &$form_state, $form_id) {
-	$config = config('content_limiter.settings');
-	$type = $form['type']['#value'];
-	$detect_limiting = $config->get('cl_'.$type);
-	if($detect_limiting == 1) {
-		$counter = db_query("SELECT count(nid) FROM {node} WHERE type='$type' AND status=1")->fetchField(); // total node count
-		$limit = $config->get('cl_limit_'.$type);
-		$warning = $config->get('cl_warning');
-		if($counter >= $limit && $warning == 1) {
-			backdrop_set_message(t('Content limiting detected ('.$counter.'/'.$limit.'). A node will be deleted upon saving.'), 'warning');
+	if (isset($form['#entity_type']) && $form['#entity_type'] == 'node') {
+		$config = config('content_limiter.settings');
+		if(isset($form['type']['#value'])) {
+			$type = $form['type']['#value'];
+			$detect_limiting = $config->get('cl_'.$type);
+			if($detect_limiting == 1) {
+				$counter = db_query("SELECT count(nid) FROM {node} WHERE type='$type' AND status=1")->fetchField(); // total node count
+				$limit = $config->get('cl_limit_'.$type);
+				$warning = $config->get('cl_warning');
+				if($counter >= $limit && $warning == 1) {
+					backdrop_set_message(t('Content limiting detected ('.$counter.'/'.$limit.'). A node will be deleted upon saving.'), 'warning');
+				}
+			}
 		}
-  }
+	}
 }
+
 
 /**
  * Implements form_node_type_form_alter
  */
- 
+
 function content_limiter_form_node_type_form_alter(&$form, &$form_state) {
 	$default_value = config_get('content_limiter.settings', 'cl_' . $form['#node_type']->type);
 	$form['content_limiter'] = array(
 	'#type' => 'fieldset',
-	'#title' => t('Node limiting'),
+	'#title' => t('Content limiting'),
 	'#weight' => 0,
 	'#collapsible' => TRUE,
 	'#collapsed' => !$default_value,
 	'#group' => 'additional_settings',
-	'#attached' => array(
-		'js' => array(
-			'auto-nodetitle' => backdrop_get_path('module', 'content_limiter') . '/content_limiter.js',
-		),
-	),
 	);
 	$form['#config'] = 'content_limiter.settings';
 	$form['content_limiter']['cl'] = array(
 	'#type' => 'checkbox',
 	'#default_value' => config_get('content_limiter.settings', 'cl_' . $form['#node_type']->type),
-	'#title' => t('Enable active node limiting'),
-	'#description' => t('Enable to enforce a maximum amout of nodes of this type.'),
+	'#title' => t('Enable active content limiting'),
+	'#description' => t('Enable to enforce the maximum pieces of content to be retained.'),
 	'#options' => array(
 		t('Disabled'),
 		t('Automatically generate the title and hide the title field'),
@@ -90,8 +96,8 @@ function content_limiter_form_node_type_form_alter(&$form, &$form_state) {
 	$form['content_limiter']['cl_limit'] = array(
 	'#type' => 'number',
 	'#size' => 80,
-	'#title' => t('Maximum nodes to retain'),
-	'#description' => t('Upon reaching the limit, new nodes saved will result in deletion of the necessary amount of nodes to enforce the limit.<br><br><strong>Warning:</strong> Deleting a large quanity of nodes can affect system performance.</strong>'),
+	'#title' => t('Maximum pieces of content to retain'),
+	'#description' => t('Upon reaching the limit new pieces of content saved will result in deletion of the necessary amount to enforce the limit.<br><br><strong>Warning:</strong> Deleting many pieces of content may affect system performance.</strong>'),
 	'#default_value' => config_get('content_limiter.settings', 'cl_limit_' . $form['#node_type']->type),
 	);
 	$form['#submit'][] = 'content_limiter_node_type_form_submit';
@@ -136,10 +142,7 @@ function content_limiter_node_presave($node) {
 					if($enable_message == 1) {
 						backdrop_set_message(t('Content limiting detected ('.$delete_quantity.' deleted)'), 'warning');
 					}
-				} // end count limit check
-			} // end nid nonexist check
-	} //end enabled check
-} // end presave function
-
-
-
+				}
+			}
+	}
+}
