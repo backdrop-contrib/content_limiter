@@ -18,7 +18,7 @@ function content_limiter_settings($form, &$form_state) {
   $form['cl_max_deletion'] = array(
     '#type' => 'number',
     '#title' => t('Node deletion limit'),
-    '#description' => t('Limit how many nodes can be deleted while saving new content.<br><small>Determines how aggressively content limiter reduces the amount of nodes.</small>'),
+    '#description' => t('Limit how many content pieces can be deleted while saving new content.<br><small>Determines how aggressively content limiter reduces the scope of content.</small>'),
     '#default_value' => $config->get('cl_max_deletion'),
   );
   $form['cl_message'] = array(
@@ -42,4 +42,3 @@ function content_limiter_settings($form, &$form_state) {
 
   return system_settings_form($form);
 }
-
