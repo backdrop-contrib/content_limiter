@@ -1,6 +1,6 @@
 # content_limiter
 
-<p>Allows for limiting the total amount of nodes of each type and gradual reduction.</p>
+<p>Allows for limiting the total amount of content pieces for each content type and gradual reduction.</p>
 
 <h1>My first module play nice!</h1>
 
