@@ -1,4 +1,7 @@
 # content_limiter
+
+<h1>My first module play nice!</h1>
+
 Allows for limiting the total amount of nodes of each type and gradual reduction.
 
 <h3>Features</h3>
