@@ -2,7 +2,7 @@
 
 <p>Allows for limiting the total amount of nodes of each type and gradual reduction.</p>
 
-<h1 style="color:orange;">My first module play nice!</h1>
+<h1>My first module play nice!</h1>
 
 <h3>Features</h3>
 <ul>
