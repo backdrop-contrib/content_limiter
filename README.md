@@ -8,14 +8,6 @@ pieces deleted at one time is 25 and can be changed on the configuration page. O
 configuration includes enabling site messages, watchdog entries and a kill switch to turn 
 off limiting for all types.
 
-All lines in this file should be no more than 80 characters long for legibility,
-unless including a URL or example that requires the line not wrap. (The first
-line of this paragraph is 80 characters for reference.)
-
-Detail in READMEs should be limited to the minimum required for installation and
-getting started. More detailed documentation should be moved to a GitHub wiki
-page: https://github.com/backdrop-contrib/setup/wiki/Documentation.
-
 Installation
 ------------
 
