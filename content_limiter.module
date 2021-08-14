@@ -51,16 +51,16 @@ function content_limiter_menu() {
  * Implements hook_form_alter().
  */
 function content_limiter_form_alter(&$form, &$form_state, $form_id) {
-  if(isset($form['#entity_type']) && $form['#entity_type'] == 'node') {
+  if (isset($form['#entity_type']) && $form['#entity_type'] == 'node') {
     $config = config('content_limiter.settings');
-    if(isset($form['type']['#value'])) {
+    if (isset($form['type']['#value'])) {
       $type = $form['type']['#value'];
       $detect_limiting = $config->get('cl_'.$type);
-      if($detect_limiting == 1) {
+      if ($detect_limiting == 1) {
         $counter = db_query("SELECT count(nid) FROM {node} WHERE type='$type' AND status=1")->fetchField(); // total node count
         $limit = $config->get('cl_limit_'.$type);
         $warning = $config->get('cl_warning');
-        if($counter >= $limit && $warning == 1) {
+        if ($counter >= $limit && $warning == 1) {
           backdrop_set_message(t('Content limiting detected ('.$counter.'/'.$limit.'). A node will be deleted upon saving.'), 'warning');
         }
       }
@@ -111,7 +111,6 @@ function content_limiter_node_type_form_submit(&$form, &$form_state) {
   $config->save();
 }
 
-
 function content_limiter_node_presave($node) {
   $config = config('content_limiter.settings');
   $type = $node->type;
@@ -122,13 +121,14 @@ function content_limiter_node_presave($node) {
   $max_deletion = $max_deletion + 1; // offset for proper quantity to delete
   $enable_logging = $config->get('cl_logging');
   $enable_message = $config->get('cl_message');
-  if($disable_limiting !=1 && $enabled == 1 && $limit > 0) {
-    if(!isset($node->nid)) { // make sure node is new
+
+  if ($disable_limiting !=1 && $enabled == 1 && $limit > 0) {
+    if (!isset($node->nid)) { // make sure node is new
         $limit = $limit -1; // offset the new node so max possible is the limit
         $counter = db_query("SELECT count(nid) FROM {node} WHERE type='$type' AND status=1")->fetchField(); // total node count
-        if($counter > $limit) {
+        if ($counter > $limit) {
           $delete_quantity = $counter - $limit; // quantity to delete
-          if($delete_quantity > $max_deletion) {
+          if ($delete_quantity > $max_deletion) {
             $delete_quantity = $max_deletion;
           }
           $nodes = node_load_multiple(array(), array('type' => $type)); // array of nodes of type
@@ -137,10 +137,10 @@ function content_limiter_node_presave($node) {
             $delete_nids[] = $delete_node->nid;
           }
           node_delete_multiple($delete_nids);
-          if($enable_logging == 1) {
+          if ($enable_logging == 1) {
             watchdog('content', $delete_quantity.' '.$type.' nodes deleted by content limiter.');
           }
-          if($enable_message == 1) {
+          if ($enable_message == 1) {
             backdrop_set_message(t('Content limiting detected ('.$delete_quantity.' deleted)'), 'warning');
           }
           file_put_contents('filename.txt', print_r($delete_nids, true));
