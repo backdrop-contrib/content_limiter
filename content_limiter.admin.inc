@@ -6,7 +6,6 @@
 
 function content_limiter_settings($form, &$form_state) {
   $config = config('content_limiter.settings');
-  $attributes = 'style="margin-bottom: 30px;"';
 
   $form['#config'] = 'content_limiter.settings';
   $form['disable_limiting'] = array(
