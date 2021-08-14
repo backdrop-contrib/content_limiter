@@ -45,7 +45,7 @@ https://github.com/backdrop-contrib/content-limiter/issues.
 Current Maintainers
 -------------------
 
-- [Ryan Somerville](https://github.com/allsite).
+- [Allsite Multimedia](https://github.com/allsite)
 - Seeking additional maintainers.
 
 License
