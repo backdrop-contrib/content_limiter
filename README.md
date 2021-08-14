@@ -1,27 +1,55 @@
-# content_limiter
+Content Limiter
+======================
+Content Limiter provides options for limiting the scope of content for any given type. 
+After enabling limiting the content type will be restricted to retain a specific amount 
+of content pieces. When a content piece is added that exceeds the limit, Content Limiter 
+will delete as many items needed to enforce the set limit. The default maximum content 
+pieces deleted at one time is 25 and can be changed on the configuration page. Other 
+configuration includes enabling site messages, watchdog entries and a kill switch to turn 
+off limiting for all types.
 
-<p>Allows for limiting the total amount of content pieces for each content type and gradual reduction.</p>
+All lines in this file should be no more than 80 characters long for legibility,
+unless including a URL or example that requires the line not wrap. (The first
+line of this paragraph is 80 characters for reference.)
 
-<h1>My first module play nice!</h1>
+Detail in READMEs should be limited to the minimum required for installation and
+getting started. More detailed documentation should be moved to a GitHub wiki
+page: https://github.com/backdrop-contrib/setup/wiki/Documentation.
 
-<h3>Features</h3>
-<ul>
-<li>Incrimental reduction of nodes</li>
-<li>Configuration for limiting per content type</li>
-<li>Configurable amount of content pieces to delete at a time</li>
-<li>Configurable site messages</li>
-<li>Configurable watchdog logging</li>
-</ul>
+Installation
+------------
 
-<h3>Use Cases</h3>
-<ul>
-<li>Limit database size</li>
-<li>Safeguard for sites with massive content scope</li>
-<li>Rolling data sets with specific sample size</li>
-<li>Removing excess for feed imports or other forms of automated content creation</li>
-</ul>
+- Install this module using the official Backdrop CMS instructions at
+  https://backdropcms.org/guide/modules.
 
+- Visit the configuration page under Administration > Configuration > Content authoring >
+  Content Limiter (admin/config/content/content-limiter) to configure default settings.
+  
+- Visit the content type configuration page under Administration > Stucture > Content Types >
+  Content Limiter (admin/structure/types/manage) to configure limiting for each type.
 
-<h3>Useage</h3>
-<p>Enable the module, then navigate to a Content Type > Edit page. Use the Content Limiting section to enable the feature and set a value to define the limit.</p>
-  <h5>Warning: Enabling these settings can result in mass-deletion of content. Use with care.</h5>
+- Any additional steps.
+
+Documentation
+-------------
+
+Additional documentation is located in the Wiki:
+https://github.com/backdrop-contrib/content-limiter/wiki/Documentation.
+
+Issues
+------
+
+Bugs and Feature requests should be reported in the Issue Queue:
+https://github.com/backdrop-contrib/content-limiter/issues.
+
+Current Maintainers
+-------------------
+
+- [Ryan Somerville](https://github.com/allsite).
+- Seeking additional maintainers.
+
+License
+-------
+
+This project is GPL v2 software. 
+See the LICENSE.txt file in this directory for complete text.
