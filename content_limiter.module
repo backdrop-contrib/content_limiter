@@ -60,7 +60,7 @@ function content_limiter_form_node_form_alter(&$form, &$form_state, $form_id) {
         $limit = $config->get('cl_limit_' . $type);
         $warning = $config->get('cl_warning');
         if ($counter >= $limit && $warning == 1) {
-          backdrop_set_message(t('Content limiting detected (' . $counter . '/' . $limit . '). A node will be deleted upon saving.'), 'warning');
+          backdrop_set_message(t('Content limiting detected (' . $counter . '/' . $limit . '). A content item will be deleted upon saving.'), 'warning');
         }
       }
     }
