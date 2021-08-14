@@ -1,6 +1,6 @@
 Content Limiter
 ======================
-Content Limiter provides options for limiting the scope of content for any given type. 
+Content Limiter provides options for limiting the scope of content for content types. 
 After enabling limiting the content type will be restricted to retain a specific amount 
 of content pieces. When a content piece is added that exceeds the limit, Content Limiter 
 will delete as many items needed to enforce the set limit. The default maximum content 
