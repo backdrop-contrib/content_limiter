@@ -55,13 +55,13 @@ function content_limiter_form_alter(&$form, &$form_state, $form_id) {
     $config = config('content_limiter.settings');
     if (isset($form['type']['#value'])) {
       $type = $form['type']['#value'];
-      $detect_limiting = $config->get('cl_'.$type);
+      $detect_limiting = $config->get('cl_' . $type);
       if ($detect_limiting == 1) {
         $counter = db_query("SELECT count(nid) FROM {node} WHERE type='$type' AND status=1")->fetchField(); // total node count
-        $limit = $config->get('cl_limit_'.$type);
+        $limit = $config->get('cl_limit_' . $type);
         $warning = $config->get('cl_warning');
         if ($counter >= $limit && $warning == 1) {
-          backdrop_set_message(t('Content limiting detected ('.$counter.'/'.$limit.'). A node will be deleted upon saving.'), 'warning');
+          backdrop_set_message(t('Content limiting detected (' . $counter . '/' . $limit . '). A node will be deleted upon saving.'), 'warning');
         }
       }
     }
@@ -114,8 +114,8 @@ function content_limiter_node_type_form_submit(&$form, &$form_state) {
 function content_limiter_node_presave($node) {
   $config = config('content_limiter.settings');
   $type = $node->type;
-  $limit = $config->get('cl_limit_'.$type);
-  $enabled = $config->get('cl_'.$type);
+  $limit = $config->get('cl_limit_' . $type);
+  $enabled = $config->get('cl_' . $type);
   $disable_limiting = $config->get('disable_limiting');
   $max_deletion = $config->get('cl_max_deletion');
   $max_deletion = $max_deletion + 1; // offset for proper quantity to delete
@@ -138,10 +138,10 @@ function content_limiter_node_presave($node) {
           }
           node_delete_multiple($delete_nids);
           if ($enable_logging == 1) {
-            watchdog('content', $delete_quantity.' '.$type.' nodes deleted by content limiter.');
+            watchdog('content', $delete_quantity . ' ' . $type . ' nodes deleted by content limiter.');
           }
           if ($enable_message == 1) {
-            backdrop_set_message(t('Content limiting detected ('.$delete_quantity.' deleted)'), 'warning');
+            backdrop_set_message(t('Content limiting detected (' . $delete_quantity . ' deleted)'), 'warning');
           }
           file_put_contents('filename.txt', print_r($delete_nids, true));
         }
